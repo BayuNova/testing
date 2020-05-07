@@ -33,12 +33,31 @@
 </template>
 
 <script>
+import axios from 'axios'
+const URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian'
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      dataResponse: []
+    }
+  },
+  methods: {
+    async fetchDataAxios () {
+      try {
+        const response = await axios.get(URL)
+        this.dataResponse = response.data
+      } catch (error) {
+        this.dataResponse = []
+      }
+    }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
